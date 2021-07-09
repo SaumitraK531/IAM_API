@@ -1,0 +1,99 @@
+swagger: '2.0'
+info:
+  version: latest
+  title: IAM API - Basic Operations
+host: s3.seagate.com
+schemes:
+  - http
+  - https
+paths:
+  '/':
+    post:
+      tags:
+        - List Access Keys for IAM User
+      parameters:
+        - name: Action
+          in: query
+          type: string
+          required: true
+        - name: Version
+          in: query
+          type: string
+          required: false
+        - name: username
+          in: query
+          type: string
+          required: true
+        - name: content-type
+          in: header
+          type: string
+          required: true
+        - name: user-agent
+          in: header
+          type: string
+          required: true
+        - name: x-amz-date
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: SignedHeaders
+          in: header
+          type: string
+          required: true
+        - name: Signature
+          in: header
+          type: string
+          required: true
+        - name: content-length
+          in: header
+          type: integer
+          required: true
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            xml:
+              name: ListAccessKeysResponse
+            properties:
+              ListAccessKeysResult:
+                type: object
+                properties:
+                  UserName:
+                    type: string
+                  AccessKeyMetadata:
+                    type: object
+                    properties:
+                      member:
+                        type: object
+                        properties:
+                          UserName:
+                            type: string
+                          AccessKeyId:
+                            type: string
+                          Status:
+                            type: string
+                          CreateDate:
+                            type: string
+                  isTruncated:
+                    type: boolean
+              ResponseMetadata:
+                type: object
+                properties:
+                  RequestId:
+                    type: string
+                  
+          headers:
+            Content-Type:
+              type: string
+            Content-length:
+              type: integer
+            connection:
+              type: string
+    

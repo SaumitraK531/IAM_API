@@ -1,0 +1,80 @@
+swagger: '2.0'
+info:
+  version: latest
+  title: IAM API - Basic Operations
+host: s3.seagate.com
+schemes:
+  - http
+  - https
+paths:
+  '/':
+    post:
+      tags:
+        - Get Account Login Profile
+      parameters:
+        - name: Action
+          in: query
+          type: string
+          required: true
+        - name: AccountName
+          in: query
+          type: string
+          required: true
+        - name: Password
+          in: query
+          type: string
+          required: true
+        - name: PasswordResetRequired
+          in: query
+          type: boolean
+          required: false
+        - name: content-type
+          in: header
+          type: string
+          required: true
+        - name: Accept
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          description: >-
+            This Header contains credentials to authorize a User-Agent with
+            server.
+          type: string
+          required: true
+        - name: SignedHeaders
+          in: header
+          type: string
+          required: true
+        - name: Signature
+          in: header
+          type: string
+          required: true
+        - name: x-amz-date
+          in: header
+          type: string
+          required: true
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            xml:
+              name: UpdateAccountLoginProfileResponse
+            properties:
+              ResponseMetadata:
+                type: object
+                properties:
+                  RequestId:
+                    type: string
+          headers:
+            Content-Type:
+              type: string
+            Content-length:
+              type: integer
+            connection:
+              type: string
+    
